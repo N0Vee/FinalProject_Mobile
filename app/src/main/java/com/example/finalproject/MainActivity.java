@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         // Setup RecyclerView in drawer
         lessonsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         List<Lesson> lessonList = createSampleLessons();
-        LessonAdapter lessonAdapter = new LessonAdapter(lessonList);
+        LessonAdapter lessonAdapter = new LessonAdapter(lessonList, MainActivity.this);
         lessonsRecyclerView.setAdapter(lessonAdapter);
 
         // Set user data
@@ -80,14 +80,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private List<Lesson> createSampleLessons() {
-        List<Lesson> lessons = new ArrayList<>();
-
-        lessons.add(new Lesson("1. ชนิดข้อมูล (Data Types)", "JavaScript data types & usage", true, false));
-        lessons.add(new Lesson("2. ตัวแปร (Variables)", "Declaring and using variables", false, false));
-        lessons.add(new Lesson("3. ตัวดำเนินการ (Operators)", "Arithmetic & logical operators", false, false));
-        lessons.add(new Lesson("4. คำสั่งควบคุม (Control Statements)", "If, switch, loops & conditions", false, false));
-        lessons.add(new Lesson("5. ฟังก์ชัน (Functions)", "Creating and using functions", false, false));
-
-        return lessons;
+        return new ArrayList<>(LessonModule.getAllLessons()); //return hashmap in to array
     }
 }
