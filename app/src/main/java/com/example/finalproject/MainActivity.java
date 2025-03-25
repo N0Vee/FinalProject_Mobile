@@ -65,7 +65,6 @@ public class MainActivity extends AppCompatActivity {
         startLessonButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Find the first incomplete lesson
                 for (Lesson lesson : lessonList) {
                     if (!lesson.isCompleted() && lesson.isUnlocked()) {
                         Toast.makeText(MainActivity.this,
