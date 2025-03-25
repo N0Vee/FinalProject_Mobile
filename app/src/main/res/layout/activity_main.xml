@@ -238,50 +238,6 @@
             </LinearLayout>
 
             <!-- Additional Menu Items -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="16dp"
-                    android:background="@color/lightGray" />
-
-                <TextView
-                    android:id="@+id/menuSettings"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/ic_settings"
-                    android:drawablePadding="16dp"
-                    android:padding="16dp"
-                    android:text="Settings"
-                    android:textColor="@color/colorPrimaryText"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/menuHelp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/ic_help"
-                    android:drawablePadding="16dp"
-                    android:padding="16dp"
-                    android:text="Help"
-                    android:textColor="@color/colorPrimaryText"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/menuAbout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/ic_info"
-                    android:drawablePadding="16dp"
-                    android:padding="16dp"
-                    android:text="About"
-                    android:textColor="@color/colorPrimaryText"
-                    android:textSize="16sp" />
-            </LinearLayout>
         </LinearLayout>
     </com.google.android.material.navigation.NavigationView>
 
