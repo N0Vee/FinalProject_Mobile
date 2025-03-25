@@ -29,6 +29,7 @@ public class QuizActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
+//        setupMenu(R.layout.activity_quiz, this);
 
         // Initialize views
         questionTextView = findViewById(R.id.questionTextView);

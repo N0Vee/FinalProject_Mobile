@@ -17,12 +17,12 @@ import androidx.appcompat.widget.Toolbar;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
-    private DrawerLayout drawerLayout;
-    private Toolbar toolbar;
+//    private DrawerLayout drawerLayout;
+//    private Toolbar toolbar;
     private Button startLessonButton;
-    private RecyclerView lessonsRecyclerView;
+//    private RecyclerView lessonsRecyclerView;
     private TextView usernameText;
     private TextView userScoreText;
 
@@ -30,32 +30,33 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setupMenu(R.layout.activity_main, this);
 
-        // Initialize views
-        drawerLayout = findViewById(R.id.drawer_layout);
-        toolbar = findViewById(R.id.toolbar);
+//        // Initialize views
+//        drawerLayout = findViewById(R.id.drawer_layout);
+//        toolbar = findViewById(R.id.toolbar);
         startLessonButton = findViewById(R.id.startLessonButton);
-        lessonsRecyclerView = findViewById(R.id.lessonsRecyclerView);
+//        lessonsRecyclerView = findViewById(R.id.lessonsRecyclerView);
         usernameText = findViewById(R.id.username);
         userScoreText = findViewById(R.id.userScore);
-
-        // Setup toolbar
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-
-        // Setup drawer toggle
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawerLayout, toolbar,
-                R.string.navigation_drawer_open,
-                R.string.navigation_drawer_close);
-        drawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
-
-        // Setup RecyclerView in drawer
-        lessonsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+//
+//        // Setup toolbar
+//        setSupportActionBar(toolbar);
+//        getSupportActionBar().setDisplayShowTitleEnabled(false);
+//
+//        // Setup drawer toggle
+//        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+//                this, drawerLayout, toolbar,
+//                R.string.navigation_drawer_open,
+//                R.string.navigation_drawer_close);
+//        drawerLayout.addDrawerListener(toggle);
+//        toggle.syncState();
+//
+//        // Setup RecyclerView in drawer
+//        lessonsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         List<Lesson> lessonList = createSampleLessons();
-        LessonAdapter lessonAdapter = new LessonAdapter(lessonList, MainActivity.this);
-        lessonsRecyclerView.setAdapter(lessonAdapter);
+//        LessonAdapter lessonAdapter = new LessonAdapter(lessonList, MainActivity.this);
+//        lessonsRecyclerView.setAdapter(lessonAdapter);
 
         // Set user data
         usernameText.setText("John Doe");

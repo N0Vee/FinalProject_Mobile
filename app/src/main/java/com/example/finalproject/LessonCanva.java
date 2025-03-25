@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class LessonCanva extends AppCompatActivity {
+public class LessonCanva extends BaseActivity {
     private TextView lessonTitleTextView;
     private TextView lessonContentTextView;
     private Button nextPageButton;
@@ -30,6 +30,7 @@ public class LessonCanva extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_lesson_canva);
+        setupMenu(R.layout.activity_lesson_canva, this);
 
         // Initialize views
         lessonTitleTextView = findViewById(R.id.lessonTitleTextView);
@@ -91,11 +92,12 @@ public class LessonCanva extends AppCompatActivity {
             finish();
         }
 
-        // Handle window insets
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            WindowInsetsCompat.Type.systemBars();
-            return insets;
-        });
+
+        //Handle window insets
+//        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.lessonsRecyclerView), (v, insets) -> {
+//            WindowInsetsCompat.Type.systemBars();
+//            return insets;
+//        });
     }
 
     private void loadPage(int page) {
