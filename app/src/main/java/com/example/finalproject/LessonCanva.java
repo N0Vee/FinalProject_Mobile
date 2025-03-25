@@ -1,6 +1,7 @@
 package com.example.finalproject;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -75,9 +76,9 @@ public class LessonCanva extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 // Start the quiz activity
-                                Toast.makeText(LessonCanva.this, "Starting Quiz", Toast.LENGTH_SHORT).show();
-                                // Intent to start quiz activity
-                                // startActivity(new Intent(LessonCanva.this, QuizActivity.class));
+                                Intent quizIntent = new Intent(LessonCanva.this, QuizActivity.class);
+                                quizIntent.putExtra("LESSON_TITLE", currentLessonTitle);
+                                startActivity(quizIntent);
                             }
                         })
                         .setNegativeButton("No", null) // Do nothing if user clicks No

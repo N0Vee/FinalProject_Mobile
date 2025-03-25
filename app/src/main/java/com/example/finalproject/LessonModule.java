@@ -665,4 +665,87 @@ public class LessonModule {
         Lesson lesson = lessons.get(lessonTitle);
         return (lesson != null) ? lesson.getMaxPage() : -1;
     }
+
+    public static int getQuizQuestionCount(String lessonTitle) {
+        // Return the number of quiz questions for a specific lesson
+        switch (lessonTitle) {
+            case "1. ชนิดข้อมูล (Data Types)":
+                return 3; // Example number of questions
+            case "2. ตัวแปร (Variables)":
+                return 2;
+            // Add more lessons as needed
+            default:
+                return 0;
+        }
+    }
+
+    public static String getQuizQuestionText(String lessonTitle, int questionNumber) {
+        // Return the text of a specific quiz question
+        switch (lessonTitle) {
+            case "1. ชนิดข้อมูล (Data Types)":
+                switch (questionNumber) {
+                    case 1: return "What is the correct way to declare a variable in Java?";
+                    case 2: return "Which of these is a primitive data type in Java?";
+                    case 3: return "What does the 'public static void main(String[] args)' method do?";
+                    default: return "Question not found";
+                }
+            case "2. ตัวแปร (Variables)":
+                switch (questionNumber) {
+                    case 1: return "What is the main layout file for an Android activity?";
+                    case 2: return "What is the purpose of the AndroidManifest.xml file?";
+                    default: return "Question not found";
+                }
+            default:
+                return "Question not found";
+        }
+    }
+
+    public static String[] getQuizQuestionOptions(String lessonTitle, int questionNumber) {
+        // Return the answer options for a specific quiz question
+        switch (lessonTitle) {
+            case "1. ชนิดข้อมูล (Data Types)":
+                switch (questionNumber) {
+                    case 1: return new String[]{"int x = 5;", "variable x = 5;", "x = 5;", "declare x = 5;"};
+                    case 2: return new String[]{"String", "Integer", "int", "List"};
+                    case 3: return new String[]{"Defines the entry point of a Java program", "Creates a new window", "Handles exceptions", "Defines a class method"};
+                    default: return new String[]{};
+                }
+            case "2. ตัวแปร (Variables)":
+                switch (questionNumber) {
+                    case 1: return new String[]{"main.xml", "activity_main.xml", "layout.xml", "android_layout.xml"};
+                    case 2: return new String[]{"Defines app permissions", "Creates UI layouts", "Manages network connections", "Handles database operations"};
+                    default: return new String[]{};
+                }
+            default:
+                return new String[]{};
+        }
+    }
+
+    public static int getQuizQuestionCorrectIndex(String lessonTitle, int questionNumber) {
+        // Return the index of the correct answer for a specific quiz question
+        switch (lessonTitle) {
+            case "1. ชนิดข้อมูล (Data Types)":
+                switch (questionNumber) {
+                    case 1: return 0; // "int x = 5;" is correct
+                    case 2: return 2; // "int" is correct
+                    case 3: return 0; // "Defines the entry point of a Java program" is correct
+                    default: return -1;
+                }
+            case "2. ตัวแปร (Variables)":
+                switch (questionNumber) {
+                    case 1: return 1; // "activity_main.xml" is correct
+                    case 2: return 0; // "Defines app permissions" is correct
+                    default: return -1;
+                }
+            default:
+                return -1;
+        }
+    }
+
+    public static void markLessonCompleted(String lessonTitle) {
+        // Method to mark a lesson as completed
+        // This would typically update a database or shared preferences
+        // For now, we'll just print a log message
+        System.out.println("Lesson " + lessonTitle + " marked as completed!");
+    }
 }
