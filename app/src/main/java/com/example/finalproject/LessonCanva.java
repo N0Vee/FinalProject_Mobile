@@ -15,6 +15,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class LessonCanva extends BaseActivity {
+
+    private LessonDatabaseHelper myDatabaseHelper;
     private TextView lessonTitleTextView;
     private TextView lessonContentTextView;
     private Button nextPageButton;
@@ -24,13 +26,20 @@ public class LessonCanva extends BaseActivity {
     private String currentLessonTitle;
     private int currentPage = 1;
     private int maxPages;
+    private boolean[] isCompleted;
+    private boolean[] isUnlocked;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_lesson_canva);
-        setupMenu(R.layout.activity_lesson_canva, this);
+
+        // Setup Menu
+        myDatabaseHelper = new LessonDatabaseHelper(this);
+        isCompleted = myDatabaseHelper.getCompletedArray();
+        isUnlocked = myDatabaseHelper.getUnlockedArray();
+        setupMenu(R.layout.activity_lesson_canva, this, LessonCanva.this,isCompleted,isUnlocked);
 
         // Initialize views
         lessonTitleTextView = findViewById(R.id.lessonTitleTextView);
@@ -80,6 +89,7 @@ public class LessonCanva extends BaseActivity {
                                 Intent quizIntent = new Intent(LessonCanva.this, QuizActivity.class);
                                 quizIntent.putExtra("LESSON_TITLE", currentLessonTitle);
                                 startActivity(quizIntent);
+                                finish();
                             }
                         })
                         .setNegativeButton("No", null) // Do nothing if user clicks No

@@ -1,15 +1,17 @@
 package com.example.finalproject;
 
+import android.content.Context;
+
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 
 public class LessonModule {
-    private static final LinkedHashMap<String, Lesson> lessons = new LinkedHashMap<>();
+    private static LinkedHashMap<String, Lesson> lessons = new LinkedHashMap<>();
 
     static {
-        Lesson lesson1 = new Lesson("1. ชนิดข้อมูล (Data Types)", "ชนิดของข้อมูลและวิธีการใช้งานใน JavaScript", true, false);
+
+        Lesson lesson1 = new Lesson("1. ชนิดข้อมูล (Data Types)", "ชนิดของข้อมูลและวิธีการใช้งานใน JavaScript");
         lesson1.addPageContent(1, "title", "String");
         lesson1.addPageContent(1, "content",
                 "String คือข้อความที่ใช้แทนตัวอักษร ตัวเลข และสัญลักษณ์ต่างๆ โดยต้องใส่ในเครื่องหมาย:\n" +
@@ -168,7 +170,7 @@ public class LessonModule {
 
 
 
-        Lesson lesson2 = new Lesson("2. ตัวแปร (Variables)", "ตัวแปร คือ ชื่อที่ใช้เก็บข้อมูลในหน่วยความจำของโปรแกรม ซึ่งสามารถเรียกใช้และเปลี่ยนค่าได้", true, false);
+        Lesson lesson2 = new Lesson("2. ตัวแปร (Variables)", "ตัวแปร คือ ชื่อที่ใช้เก็บข้อมูลในหน่วยความจำของโปรแกรม ซึ่งสามารถเรียกใช้และเปลี่ยนค่าได้");
 
         lesson2.addPageContent(1, "title", "var ไม่แนะนำให้ใช้");
         lesson2.addPageContent(1, "content",
@@ -245,7 +247,7 @@ public class LessonModule {
                         "   console.log(PI);  // Error: PI is not defined\n"
         );
 
-        Lesson lesson3 = new Lesson("3. ตัวดำเนินการ (Operators)", "ตัวดำเนินการ คือคำสั่งที่ใช้สำหรับการดำเนินการทางคณิตศาสตร์ การเปรียบเทียบ และการควบคุมตรรกะต่าง ๆ", true, false);
+        Lesson lesson3 = new Lesson("3. ตัวดำเนินการ (Operators)", "ตัวดำเนินการ คือคำสั่งที่ใช้สำหรับการดำเนินการทางคณิตศาสตร์ การเปรียบเทียบ และการควบคุมตรรกะต่าง ๆ");
 
         lesson3.addPageContent(1, "title", "ตัวดำเนินการทางคณิตศาสตร์");
         lesson3.addPageContent(1, "content",
@@ -363,7 +365,7 @@ public class LessonModule {
                         "   i--;  // ผลลัพธ์: 4\n"
         );
 
-        Lesson lesson4 = new Lesson("4. คำสั่งควบคุม (Control Statements)", "คำสั่งควบคุม คือ คำสั่งที่ใช้สำหรับกำหนดลำดับการทำงานของโปรแกรม", true, false);
+        Lesson lesson4 = new Lesson("4. คำสั่งควบคุม (Control Statements)", "คำสั่งควบคุม คือ คำสั่งที่ใช้สำหรับกำหนดลำดับการทำงานของโปรแกรม");
 
         lesson4.addPageContent(1, "title", "if else");
         lesson4.addPageContent(1, "content",
@@ -535,7 +537,7 @@ public class LessonModule {
                         "8\n"
         );
 
-        Lesson lesson5 = new Lesson("5. ฟังก์ชัน (Function)", "ฟังก์ชัน คือ กลุ่มของคำสั่งที่ใช้ทำงานเฉพาะเจาะจง โดยสามารถเรียกใช้ซ้ำได้ ช่วยให้โค้ดอ่านง่ายและลดความซ้ำซ้อน", true, false);
+        Lesson lesson5 = new Lesson("5. ฟังก์ชัน (Function)", "ฟังก์ชัน คือ กลุ่มของคำสั่งที่ใช้ทำงานเฉพาะเจาะจง โดยสามารถเรียกใช้ซ้ำได้ ช่วยให้โค้ดอ่านง่ายและลดความซ้ำซ้อน");
 
         lesson5.addPageContent(1, "title", "ฟังก์ชันแบบปกติ (Function Declaration)");
         lesson5.addPageContent(1, "content",
@@ -641,7 +643,6 @@ public class LessonModule {
                         "This is inner function\n"
         );
 
-
         // Use the full lesson title as the key
         lessons.put("1. ชนิดข้อมูล (Data Types)", lesson1);
         lessons.put("2. ตัวแปร (Variables)", lesson2);
@@ -667,53 +668,302 @@ public class LessonModule {
     }
 
     public static int getQuizQuestionCount(String lessonTitle) {
-        // Return the number of quiz questions for a specific lesson
+        // คืนค่าจำนวนคำถามสำหรับบทเรียนที่ระบุ
         switch (lessonTitle) {
             case "1. ชนิดข้อมูล (Data Types)":
-                return 3; // Example number of questions
             case "2. ตัวแปร (Variables)":
-                return 2;
-            // Add more lessons as needed
+            case "3. ตัวดำเนินการ (Operators)":
+            case "4. คำสั่งควบคุม (Control Statements)":
+            case "5. ฟังก์ชัน (Function)":
+                return 10;
             default:
                 return 0;
         }
     }
 
     public static String getQuizQuestionText(String lessonTitle, int questionNumber) {
-        // Return the text of a specific quiz question
+        // คืนค่าข้อความคำถามสำหรับแต่ละหัวข้อ โดยอ้างอิงจากเนื้อหาบทเรียน
         switch (lessonTitle) {
             case "1. ชนิดข้อมูล (Data Types)":
                 switch (questionNumber) {
-                    case 1: return "What is the correct way to declare a variable in Java?";
-                    case 2: return "Which of these is a primitive data type in Java?";
-                    case 3: return "What does the 'public static void main(String[] args)' method do?";
-                    default: return "Question not found";
+                    case 1: return "ข้อใดไม่ใช่ชนิดข้อมูลพื้นฐานที่กล่าวถึงในบทเรียนนี้?";
+                    case 2: return "ในการประกาศ String สามารถใช้เครื่องหมายใดได้บ้าง?";
+                    case 3: return "เครื่องหมายสำหรับ Template Literal คือเครื่องหมายอะไร?";
+                    case 4: return "ผลลัพธ์ของ typeof null คืออะไร?";
+                    case 5: return "ผลลัพธ์ของการคำนวณ 'Hello' * 2 ใน JavaScript คืออะไร?";
+                    case 6: return "ข้อใดเป็นค่าที่แปลงเป็น false เมื่อใช้ Boolean()?";
+                    case 7: return "ในบทเรียน ค่าที่ถูกกำหนดโดยเจตนาเพื่อแทน 'ค่าว่าง' คืออะไร?";
+                    case 8: return "การต่อข้อความ (Concatenation) ใน JavaScript ใช้เครื่องหมายใด?";
+                    case 9: return "ผลลัพธ์ของ typeof NaN คืออะไร?";
+                    case 10: return "ข้อใดคือคำอธิบายที่ถูกต้องเกี่ยวกับ String ในบทเรียนนี้?";
+                    default: return "ไม่พบคำถาม";
                 }
             case "2. ตัวแปร (Variables)":
                 switch (questionNumber) {
-                    case 1: return "What is the main layout file for an Android activity?";
-                    case 2: return "What is the purpose of the AndroidManifest.xml file?";
-                    default: return "Question not found";
+                    case 1: return "คำสั่งใดไม่แนะนำให้ใช้ประกาศตัวแปรใน JavaScript?";
+                    case 2: return "ตัวแปรที่ประกาศด้วย let มีขอบเขตแบบใด?";
+                    case 3: return "ตัวแปรที่ประกาศด้วย const มีคุณสมบัติใด?";
+                    case 4: return "ถ้าประกาศตัวแปรด้วย var ภายใน if แล้วเข้าถึงนอก if จะเกิดอะไรขึ้น?";
+                    case 5: return "การประกาศตัวแปรซ้ำใน Scope เดียวกันด้วย let จะเกิดผลลัพธ์อย่างไร?";
+                    case 6: return "ในการประกาศ const ต้องกำหนดค่าเริ่มต้นหรือไม่?";
+                    case 7: return "ข้อใดถูกต้องเกี่ยวกับความแตกต่างระหว่าง var กับ let?";
+                    case 8: return "ปัญหาของ var ที่เกิดจาก hoisting คืออะไร?";
+                    case 9: return "ข้อใดไม่อนุญาตให้เปลี่ยนแปลงค่าได้หลังประกาศ?";
+                    case 10: return "คำแนะนำในการประกาศตัวแปรที่ดีคืออะไร?";
+                    default: return "ไม่พบคำถาม";
+                }
+            case "3. ตัวดำเนินการ (Operators)":
+                switch (questionNumber) {
+                    case 1: return "เครื่องหมาย '+' เมื่อใช้กับตัวเลขใน JavaScript หมายถึงอะไร?";
+                    case 2: return "เครื่องหมาย '%' ใน JavaScript ใช้สำหรับการทำงานใด?";
+                    case 3: return "เครื่องหมาย '**' ใช้สำหรับทำอะไร?";
+                    case 4: return "ตัวดำเนินการ '==' ใช้ตรวจสอบอะไร?";
+                    case 5: return "ตัวดำเนินการ '===' ตรวจสอบอะไรเพิ่มเติมจาก '=='?";
+                    case 6: return "ผลลัพธ์ของ 5 == '5' คืออะไร?";
+                    case 7: return "ผลลัพธ์ของ 5 === '5' คืออะไร?";
+                    case 8: return "เครื่องหมาย '&&' ใช้สำหรับตรวจสอบเงื่อนไขอย่างไร?";
+                    case 9: return "เครื่องหมาย '||' ใช้สำหรับตรวจสอบเงื่อนไขอย่างไร?";
+                    case 10: return "เครื่องหมาย '!' ใน JavaScript มีหน้าที่ทำอะไร?";
+                    default: return "ไม่พบคำถาม";
+                }
+            case "4. คำสั่งควบคุม (Control Statements)":
+                switch (questionNumber) {
+                    case 1: return "คำสั่ง if ใช้สำหรับอะไรใน JavaScript?";
+                    case 2: return "คำสั่ง switch ใช้สำหรับกรณีใด?";
+                    case 3: return "คำสั่ง for ใช้สำหรับทำอะไร?";
+                    case 4: return "คำสั่ง while ใช้สำหรับอะไร?";
+                    case 5: return "ความแตกต่างระหว่าง while กับ do while คืออะไร?";
+                    case 6: return "คำสั่ง for of ใช้สำหรับทำอะไร?";
+                    case 7: return "คำสั่ง for in ใช้สำหรับทำอะไร?";
+                    case 8: return "คำสั่ง break ใช้เพื่อวัตถุประสงค์ใด?";
+                    case 9: return "คำสั่ง continue ใช้เพื่อวัตถุประสงค์ใด?";
+                    case 10: return "คำสั่ง return ในฟังก์ชันมีหน้าที่อะไร?";
+                    default: return "ไม่พบคำถาม";
+                }
+            case "5. ฟังก์ชัน (Function)":
+                switch (questionNumber) {
+                    case 1: return "ฟังก์ชัน Declaration คืออะไร?";
+                    case 2: return "ฟังก์ชันที่มีพารามิเตอร์ (Function with Parameters) มีลักษณะอย่างไร?";
+                    case 3: return "ฟังก์ชันที่มีการคืนค่าควรใช้คำสั่งใด?";
+                    case 4: return "ฟังก์ชัน Expression คืออะไร?";
+                    case 5: return "ฟังก์ชัน Arrow (Arrow Function) มีลักษณะพิเศษอย่างไร?";
+                    case 6: return "Rest Parameter ในฟังก์ชันใช้เพื่ออะไร?";
+                    case 7: return "Default Parameter คืออะไร?";
+                    case 8: return "ฟังก์ชัน Nested หมายถึงอะไร?";
+                    case 9: return "ในการเรียกใช้ฟังก์ชันแบบ Declaration ทำได้อย่างไร?";
+                    case 10: return "ข้อใดถูกต้องเกี่ยวกับฟังก์ชันใน JavaScript ตามบทเรียนนี้?";
+                    default: return "ไม่พบคำถาม";
                 }
             default:
-                return "Question not found";
+                return "ไม่พบคำถาม";
         }
     }
 
     public static String[] getQuizQuestionOptions(String lessonTitle, int questionNumber) {
-        // Return the answer options for a specific quiz question
         switch (lessonTitle) {
             case "1. ชนิดข้อมูล (Data Types)":
                 switch (questionNumber) {
-                    case 1: return new String[]{"int x = 5;", "variable x = 5;", "x = 5;", "declare x = 5;"};
-                    case 2: return new String[]{"String", "Integer", "int", "List"};
-                    case 3: return new String[]{"Defines the entry point of a Java program", "Creates a new window", "Handles exceptions", "Defines a class method"};
+                    case 1: return new String[]{
+                            "String, Number, Boolean",
+                            "String, Number, Boolean, Array",
+                            "Number, Boolean, Object",
+                            "Boolean, Array, Function"
+                    };
+                    case 2: return new String[]{
+                            "ใช้ได้เฉพาะเครื่องหมายเดี่ยว",
+                            "ใช้ได้เฉพาะเครื่องหมายคู่",
+                            "ใช้ได้ทั้ง ' ', \" \", และ ` `",
+                            "ใช้ได้เฉพาะ ` `"
+                    };
+                    case 3: return new String[]{
+                            "' '",
+                            "\" \"",
+                            "` `",
+                            "ไม่มีข้อถูก"
+                    };
+                    case 4: return new String[]{
+                            "null",
+                            "undefined",
+                            "object",
+                            "number"
+                    };
+                    case 5: return new String[]{
+                            "0",
+                            "undefined",
+                            "NaN",
+                            "Error"
+                    };
+                    case 6: return new String[]{
+                            "0",
+                            "1",
+                            "\"\"",
+                            "true"
+                    };
+                    case 7: return new String[]{
+                            "undefined",
+                            "null",
+                            "NaN",
+                            "false"
+                    };
+                    case 8: return new String[]{"+", "&", "*", "-"};
+                    case 9: return new String[]{
+                            "number",
+                            "object",
+                            "NaN",
+                            "undefined"
+                    };
+                    case 10: return new String[]{
+                            "String ต้องอยู่ในเครื่องหมายเดียวเท่านั้น",
+                            "สามารถใช้เครื่องหมายเดี่ยว คู่ หรือแบ็คติ๊กได้",
+                            "Template Literal ต้องใช้เครื่องหมายคู่เท่านั้น",
+                            "ไม่สามารถประกาศ String ด้วยเครื่องหมายแบ็คติ๊กได้"
+                    };
                     default: return new String[]{};
                 }
             case "2. ตัวแปร (Variables)":
                 switch (questionNumber) {
-                    case 1: return new String[]{"main.xml", "activity_main.xml", "layout.xml", "android_layout.xml"};
-                    case 2: return new String[]{"Defines app permissions", "Creates UI layouts", "Manages network connections", "Handles database operations"};
+                    case 1: return new String[]{"var", "let", "const", "ทั้ง let และ const"};
+                    case 2: return new String[]{"Global", "Function", "Block", "Module"};
+                    case 3: return new String[]{"ไม่สามารถเปลี่ยนค่าได้", "มี Block Scope", "ต้องกำหนดค่าเริ่มต้น", "ทั้งหมดถูก"};
+                    case 4: return new String[]{"เกิด Error", "ค่าที่ประกาศใน if สามารถเข้าถึงได้", "undefined", "null"};
+                    case 5: return new String[]{"ทำงานตามปกติ", "Overwrites ค่าเดิม", "เกิด Error", "ค่าที่ประกาศล่าสุดจะได้ผล"};
+                    case 6: return new String[]{"ต้องกำหนดค่าเริ่มต้น", "ไม่จำเป็นต้องกำหนด", "สามารถเปลี่ยนแปลงได้", "ขึ้นอยู่กับบริบท"};
+                    case 7: return new String[]{"var ไม่มี hoisting", "let มี Block Scope", "ทั้ง 2 ข้อถูก", "ไม่มีข้อถูก"};
+                    case 8: return new String[]{"เข้าถึงได้ก่อนประกาศ", "ให้ค่าเป็น undefined", "เกิด Error", "ไม่ส่งผลใด ๆ"};
+                    case 9: return new String[]{"var", "let", "const", "function"};
+                    case 10: return new String[]{"ใช้ var", "ใช้ let หรือ const", "ใช้ทุกแบบได้", "ไม่มีข้อถูก"};
+                    default: return new String[]{};
+                }
+            case "3. ตัวดำเนินการ (Operators)":
+                // ปรับลำดับตัวเลือกให้คำตอบถูกไม่ใช่ตัวเลือกแรกเสมอ
+                switch (questionNumber) {
+                    case 1: return new String[]{
+                            "คูณ", "ลบ", "บวก", "หาร"
+                    }; // "บวก" อยู่ที่ index 2
+                    case 2: return new String[]{
+                            "บวก", "หารเอาเศษ", "หาร", "ลบ"
+                    }; // "หารเอาเศษ" อยู่ที่ index 1
+                    case 3: return new String[]{
+                            "บวก", "ลบ", "คูณ", "ยกกำลัง"
+                    }; // "ยกกำลัง" อยู่ที่ index 3
+                    case 4: return new String[]{
+                            "ตรวจสอบชนิดเท่านั้น", "ตรวจสอบทั้งค่าและชนิด", "ตรวจสอบค่าเท่ากัน", "ไม่ตรวจสอบอะไรเลย"
+                    }; // "ตรวจสอบค่าเท่ากัน" อยู่ที่ index 2
+                    case 5: return new String[]{
+                            "ตรวจสอบค่าเท่ากัน", "ตรวจสอบทั้งค่าและชนิด", "ตรวจสอบชนิดเท่านั้น", "ไม่ตรวจสอบ"
+                    }; // "ตรวจสอบทั้งค่าและชนิด" อยู่ที่ index 1
+                    case 6: return new String[]{
+                            "false", "NaN", "true", "undefined"
+                    }; // "true" อยู่ที่ index 2
+                    case 7: return new String[]{
+                            "NaN", "false", "undefined", "true"
+                    }; // "false" อยู่ที่ index 1
+                    case 8: return new String[]{
+                            "อย่างน้อยหนึ่งเงื่อนไขเป็นจริง", "ทั้งคู่เป็นเท็จ", "ทั้งสองเงื่อนไขต้องเป็นจริง", "ไม่มีข้อถูก"
+                    }; // "ทั้งสองเงื่อนไขต้องเป็นจริง" อยู่ที่ index 2
+                    case 9: return new String[]{
+                            "ทั้งสองเงื่อนไขเป็นจริง", "ไม่สามารถใช้งานได้", "อย่างน้อยหนึ่งเงื่อนไขเป็นจริง", "ทั้งคู่เป็นเท็จ"
+                    }; // "อย่างน้อยหนึ่งเงื่อนไขเป็นจริง" อยู่ที่ index 2
+                    case 10: return new String[]{
+                            "ตรวจสอบค่า", "เพิ่มค่าขึ้น", "ลดค่าลง", "กลับค่าความจริงตรงกันข้าม"
+                    }; // "กลับค่าความจริงตรงกันข้าม" อยู่ที่ index 3
+                    default: return new String[]{};
+                }
+            case "4. คำสั่งควบคุม (Control Statements)":
+                // ปรับลำดับตัวเลือกใหม่เพื่อให้กระจายคำตอบที่ถูกต้อง
+                switch (questionNumber) {
+                    case 1: return new String[]{
+                            "วนลูป", "ประกาศตัวแปร", "ตรวจสอบเงื่อนไข", "สร้างฟังก์ชัน"
+                    }; // Correct: "ตรวจสอบเงื่อนไข" index 2
+                    case 2: return new String[]{
+                            "วนลูป", "ตรวจสอบหลายเงื่อนไข", "ประกาศตัวแปร", "เรียกฟังก์ชัน"
+                    }; // Correct: index 1
+                    case 3: return new String[]{
+                            "ประกาศตัวแปร", "ตรวจสอบเงื่อนไข", "วนลูปตามจำนวนรอบ", "เรียกฟังก์ชัน"
+                    }; // Correct: index 2
+                    case 4: return new String[]{
+                            "ประกาศตัวแปร", "เรียกฟังก์ชัน", "วนลูปจนกว่าเงื่อนไขจะเป็น false", "วนลูปตามจำนวนรอบ"
+                    }; // Correct: index 2
+                    case 5: return new String[]{
+                            "while ทำงานก่อนตรวจสอบเงื่อนไข", "ไม่มีความแตกต่าง", "ทั้งคู่ทำงานแบบเดียวกัน", "do while ทำงานก่อนตรวจสอบเงื่อนไข"
+                    }; // Correct: index 3
+                    case 6: return new String[]{
+                            "ตรวจสอบเงื่อนไข", "วนลูปในอาร์เรย์", "ประกาศตัวแปร", "วนลูปในอ็อบเจ็กต์"
+                    }; // Correct: index 1 ("วนลูปในอาร์เรย์")
+                    case 7: return new String[]{
+                            "ตรวจสอบเงื่อนไข", "วนลูปในอาร์เรย์", "ประกาศตัวแปร", "วนลูปในอ็อบเจ็กต์"
+                    }; // Correct: index 3 ("วนลูปในอ็อบเจ็กต์")
+                    case 8: return new String[]{
+                            "ส่งค่ากลับ", "เริ่มใหม่", "ข้ามรอบปัจจุบัน", "หยุดลูปทันที"
+                    }; // Correct: index 3
+                    case 9: return new String[]{
+                            "ส่งค่ากลับ", "เริ่มใหม่", "ข้ามรอบปัจจุบัน", "หยุดลูป"
+                    }; // Correct: index 2
+                    case 10: return new String[]{
+                            "วนลูป", "ประกาศตัวแปร", "ตรวจสอบเงื่อนไข", "ส่งค่ากลับและหยุดการทำงาน"
+                    }; // Correct: index 3
+                    default: return new String[]{};
+                }
+            case "5. ฟังก์ชัน (Function)":
+                // ปรับลำดับตัวเลือกใหม่
+                switch (questionNumber) {
+                    case 1: return new String[]{
+                            "ฟังก์ชันที่ไม่มีชื่อ",
+                            "ฟังก์ชันที่ใช้ arrow syntax",
+                            "ฟังก์ชันภายในฟังก์ชัน",
+                            "ฟังก์ชันที่ประกาศด้วย function ตามด้วยชื่อฟังก์ชัน"
+                    }; // Correct: index 3
+                    case 2: return new String[]{
+                            "ฟังก์ชันที่ไม่มีการส่งค่ากลับ",
+                            "ฟังก์ชันที่รับพารามิเตอร์จากภายนอก",
+                            "ฟังก์ชันที่คืนค่าเท่านั้น",
+                            "ฟังก์ชันที่ไม่มีชื่อ"
+                    }; // Correct: index 1
+                    case 3: return new String[]{
+                            "yield", "return", "exit", "break"
+                    }; // Correct: index 1
+                    case 4: return new String[]{
+                            "ฟังก์ชันที่ไม่มีชื่อ",
+                            "ฟังก์ชัน Arrow",
+                            "ฟังก์ชันที่ประกาศด้วยการกำหนดให้ตัวแปร",
+                            "ทั้ง A และ B"
+                    }; // Correct: index 3
+                    case 5: return new String[]{
+                            "ฟังก์ชันที่ส่งค่ากลับอัตโนมัติ",
+                            "ทั้ง A และ B",
+                            "ฟังก์ชันที่ไม่มีชื่อ",
+                            "รูปแบบย่อของฟังก์ชัน"
+                    }; // Correct: index 3
+                    case 6: return new String[]{
+                            "ใช้สำหรับส่งค่ากลับ",
+                            "ใช้สำหรับประกาศฟังก์ชันภายใน",
+                            "ใช้สำหรับรับพารามิเตอร์จำนวนไม่จำกัด",
+                            "ใช้สำหรับกำหนดค่าเริ่มต้นให้พารามิเตอร์"
+                    }; // Correct: index 2
+                    case 7: return new String[]{
+                            "พารามิเตอร์ที่ถูกส่งเข้ามาในรูปแบบอาร์เรย์",
+                            "พารามิเตอร์ที่มีค่าเริ่มต้น",
+                            "ทั้ง A และ C",
+                            "พารามิเตอร์ที่ไม่สามารถเปลี่ยนแปลงได้"
+                    }; // Correct: index 2
+                    case 8: return new String[]{
+                            "ฟังก์ชัน Arrow",
+                            "ฟังก์ชันที่ถูกประกาศในระดับ Global",
+                            "ฟังก์ชันที่ไม่มีพารามิเตอร์",
+                            "ฟังก์ชันที่ประกาศภายในฟังก์ชันอื่น"
+                    }; // Correct: index 3
+                    case 9: return new String[]{
+                            "เรียกใช้ผ่านตัวแปรที่เก็บฟังก์ชัน",
+                            "เรียกใช้โดยใช้ชื่อฟังก์ชัน",
+                            "ทั้ง A และ B",
+                            "เรียกใช้ผ่าน return statement"
+                    }; // Correct: index 2
+                    case 10: return new String[]{
+                            "ฟังก์ชันสามารถรับพารามิเตอร์ได้",
+                            "ฟังก์ชันสามารถส่งกลับเป็นค่าได้",
+                            "ฟังก์ชันสามารถเก็บเป็นตัวแปรได้",
+                            "ทั้งหมดถูก"
+                    }; // Correct: index 3
                     default: return new String[]{};
                 }
             default:
@@ -722,19 +972,75 @@ public class LessonModule {
     }
 
     public static int getQuizQuestionCorrectIndex(String lessonTitle, int questionNumber) {
-        // Return the index of the correct answer for a specific quiz question
         switch (lessonTitle) {
             case "1. ชนิดข้อมูล (Data Types)":
                 switch (questionNumber) {
-                    case 1: return 0; // "int x = 5;" is correct
-                    case 2: return 2; // "int" is correct
-                    case 3: return 0; // "Defines the entry point of a Java program" is correct
+                    case 1: return 1;  // "String, Number, Boolean, Array"
+                    case 2: return 2;  // "ใช้ได้ทั้ง ' ', \" \", และ ` `"
+                    case 3: return 2;  // "` `"
+                    case 4: return 2;  // "object"
+                    case 5: return 2;  // "NaN"
+                    case 6: return 0;  // "0"
+                    case 7: return 1;  // "null"
+                    case 8: return 0;  // "+"
+                    case 9: return 0;  // "number"
+                    case 10: return 1; // "สามารถใช้เครื่องหมายเดี่ยว คู่ หรือแบ็คติ๊กได้"
                     default: return -1;
                 }
             case "2. ตัวแปร (Variables)":
                 switch (questionNumber) {
-                    case 1: return 1; // "activity_main.xml" is correct
-                    case 2: return 0; // "Defines app permissions" is correct
+                    case 1: return 0;  // "var"
+                    case 2: return 2;  // "Block"
+                    case 3: return 3;  // "ทั้งหมดถูก"
+                    case 4: return 1;  // "ค่าที่ประกาศใน if สามารถเข้าถึงได้"
+                    case 5: return 2;  // "เกิด Error"
+                    case 6: return 0;  // "ต้องกำหนดค่าเริ่มต้น"
+                    case 7: return 1;  // "let มี Block Scope"
+                    case 8: return 1;  // "ให้ค่าเป็น undefined"
+                    case 9: return 2;  // "const"
+                    case 10: return 1; // "ใช้ let หรือ const"
+                    default: return -1;
+                }
+            case "3. ตัวดำเนินการ (Operators)":
+                switch (questionNumber) {
+                    case 1: return 2;  // "บวก" อยู่ที่ index 2
+                    case 2: return 1;  // "หารเอาเศษ" อยู่ที่ index 1
+                    case 3: return 3;  // "ยกกำลัง" อยู่ที่ index 3
+                    case 4: return 2;  // "ตรวจสอบค่าเท่ากัน" อยู่ที่ index 2
+                    case 5: return 1;  // "ตรวจสอบทั้งค่าและชนิด" อยู่ที่ index 1
+                    case 6: return 2;  // "true" อยู่ที่ index 2
+                    case 7: return 1;  // "false" อยู่ที่ index 1
+                    case 8: return 2;  // "ทั้งสองเงื่อนไขต้องเป็นจริง" อยู่ที่ index 2
+                    case 9: return 2;  // "อย่างน้อยหนึ่งเงื่อนไขเป็นจริง" อยู่ที่ index 2
+                    case 10: return 3; // "กลับค่าความจริงตรงกันข้าม" อยู่ที่ index 3
+                    default: return -1;
+                }
+            case "4. คำสั่งควบคุม (Control Statements)":
+                switch (questionNumber) {
+                    case 1: return 2;  // "ตรวจสอบเงื่อนไข" อยู่ที่ index 2
+                    case 2: return 1;  // "ตรวจสอบหลายเงื่อนไข" อยู่ที่ index 1
+                    case 3: return 2;  // "วนลูปตามจำนวนรอบ" อยู่ที่ index 2
+                    case 4: return 2;  // "วนลูปจนกว่าเงื่อนไขจะเป็น false" อยู่ที่ index 2
+                    case 5: return 3;  // "do while ทำงานก่อนตรวจสอบเงื่อนไข" อยู่ที่ index 3
+                    case 6: return 1;  // "วนลูปในอาร์เรย์" อยู่ที่ index 1
+                    case 7: return 3;  // "วนลูปในอ็อบเจ็กต์" อยู่ที่ index 3
+                    case 8: return 3;  // "หยุดลูปทันที" อยู่ที่ index 3
+                    case 9: return 2;  // "ข้ามรอบปัจจุบัน" อยู่ที่ index 2
+                    case 10: return 3; // "ส่งค่ากลับและหยุดการทำงาน" อยู่ที่ index 3
+                    default: return -1;
+                }
+            case "5. ฟังก์ชัน (Function)":
+                switch (questionNumber) {
+                    case 1: return 3;  // "ฟังก์ชันที่ประกาศด้วย function ตามด้วยชื่อ" อยู่ที่ index 3
+                    case 2: return 1;  // "ฟังก์ชันที่รับพารามิเตอร์จากภายนอก" อยู่ที่ index 1
+                    case 3: return 1;  // "return" อยู่ที่ index 1
+                    case 4: return 3;  // "ทั้ง A และ B" อยู่ที่ index 3
+                    case 5: return 3;  // "รูปแบบย่อของฟังก์ชัน" อยู่ที่ index 3
+                    case 6: return 2;  // "ใช้สำหรับรับพารามิเตอร์จำนวนไม่จำกัด" อยู่ที่ index 2
+                    case 7: return 2;  // "ทั้ง A และ C" อยู่ที่ index 2
+                    case 8: return 3;  // "ฟังก์ชันที่ประกาศภายในฟังก์ชันอื่น" อยู่ที่ index 3
+                    case 9: return 2;  // "ทั้ง A และ B" อยู่ที่ index 2
+                    case 10: return 3; // "ทั้งหมดถูก" อยู่ที่ index 3
                     default: return -1;
                 }
             default:

@@ -2,10 +2,15 @@ package com.example.finalproject;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
+
 import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -18,24 +23,48 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BaseActivity extends AppCompatActivity {
+
+    protected LessonDatabaseHelper lessonDatabaseHelper;
     protected DrawerLayout drawerLayout;
     protected Toolbar toolbar;
     protected NavigationView navigationView;
     protected RecyclerView lessonsRecyclerView;
+    protected Button btnReset;
+    protected Activity activity;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
-    protected void setupMenu(@LayoutRes int layoutRes, Context context) {
+    protected void setupMenu(@LayoutRes int layoutRes, Context context, Activity activity, boolean[] isCompleted, boolean[] isUnlocked) {
         setContentView(layoutRes);
+        lessonDatabaseHelper = new LessonDatabaseHelper(context);
 
         // Initialize views
         drawerLayout = findViewById(R.id.drawer_layout);
         toolbar = findViewById(R.id.toolbar);
         navigationView = findViewById(R.id.nav_view);
         lessonsRecyclerView = findViewById(R.id.lessonsRecyclerView); // Ensure this is in the layout
+        btnReset = findViewById(R.id.btnReset);
+
+        btnReset.setOnClickListener(view -> {
+            new AlertDialog.Builder(context)
+                    .setTitle("⚠\uFE0F Warning: Reset Data")
+                    .setMessage("This action will permanently erase all progress, including scores, unlocked lessons, and completed lessons.\n\nThis cannot be undone. Are you sure you want to reset your data?")
+                    .setPositiveButton("Reset Data", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            lessonDatabaseHelper.resetDatabase();
+                            // Start the quiz activity
+                            Intent mainAct = new Intent(context, MainActivity.class);
+                            startActivity(mainAct);
+                            activity.finish();
+                        }
+                    })
+                    .setNegativeButton("Cancel", null) // Do nothing if user clicks No
+                    .show();
+        });
 
         // Setup toolbar
         setSupportActionBar(toolbar);
@@ -55,7 +84,7 @@ public class BaseActivity extends AppCompatActivity {
         if (lessonsRecyclerView != null) {
             lessonsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
             List<Lesson> lessonList = createSampleLessons();
-            LessonAdapter lessonAdapter = new LessonAdapter(lessonList, context);
+            LessonAdapter lessonAdapter = new LessonAdapter(lessonList, context, activity,isCompleted, isUnlocked);
             lessonsRecyclerView.setAdapter(lessonAdapter);
         }
     }

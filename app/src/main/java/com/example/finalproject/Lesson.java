@@ -1,19 +1,22 @@
 package com.example.finalproject;
 
+import android.content.Context;
+
 import java.util.HashMap;
 
 public class Lesson {
+
     private String title;
     private String description;
     private boolean isUnlocked;
     private boolean isCompleted;
     private HashMap<Integer, HashMap<String, String>> pages; // Page storage
 
-    public Lesson(String title, String description, boolean isUnlocked, boolean isCompleted) {
+    public Lesson(String title, String description) {
         this.title = title;
         this.description = description;
-        this.isUnlocked = isUnlocked;
-        this.isCompleted = isCompleted;
+        this.isUnlocked = true;
+        this.isCompleted = true;
         this.pages = new HashMap<>();
     }
 
@@ -34,6 +37,14 @@ public class Lesson {
     // Get maximum page number
     public int getMaxPage() {
         return pages.isEmpty() ? 0 : pages.keySet().stream().max(Integer::compare).orElse(0);
+    }
+
+    public void setUnlocked(boolean Boolean){
+        this.isUnlocked = Boolean;
+    }
+
+    public void setCompleted(boolean Boolean){
+        this.isCompleted = Boolean;
     }
 
     // Getters for basic lesson info

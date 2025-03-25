@@ -14,12 +14,20 @@
             android:orientation="vertical">
 
             <!-- User Profile Section -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/colorPrimary"
                 android:orientation="vertical"
                 android:padding="16dp">
+
+                <Button
+                    android:id="@+id/btnReset"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="RESET"
+                    android:textAlignment="textStart" />
 
                 <ImageView
                     android:id="@+id/userAvatar"
@@ -65,6 +73,7 @@
                         android:textSize="16sp"
                         android:textStyle="bold" />
                 </LinearLayout>
+
             </LinearLayout>
 
             <!-- Menu Options -->
