@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 
 import androidx.annotation.LayoutRes;
@@ -29,7 +30,7 @@ public class BaseActivity extends AppCompatActivity {
     protected Toolbar toolbar;
     protected NavigationView navigationView;
     protected RecyclerView lessonsRecyclerView;
-    protected Button btnReset;
+    protected Button btnReset, btnHome;
     protected Activity activity;
 
     @Override
@@ -45,8 +46,9 @@ public class BaseActivity extends AppCompatActivity {
         drawerLayout = findViewById(R.id.drawer_layout);
         toolbar = findViewById(R.id.toolbar);
         navigationView = findViewById(R.id.nav_view);
-        lessonsRecyclerView = findViewById(R.id.lessonsRecyclerView); // Ensure this is in the layout
+        lessonsRecyclerView = findViewById(R.id.lessonsRecyclerView);
         btnReset = findViewById(R.id.btnReset);
+        btnHome = findViewById(R.id.btnHome);
 
         btnReset.setOnClickListener(view -> {
             new AlertDialog.Builder(context)
@@ -56,22 +58,30 @@ public class BaseActivity extends AppCompatActivity {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             lessonDatabaseHelper.resetDatabase();
-                            // Start the quiz activity
+                            // Start quiz
                             Intent mainAct = new Intent(context, MainActivity.class);
                             startActivity(mainAct);
                             activity.finish();
                         }
                     })
-                    .setNegativeButton("Cancel", null) // Do nothing if user clicks No
+                    .setNegativeButton("Cancel", null)
                     .show();
         });
 
-        // Setup toolbar
-        setSupportActionBar(toolbar);
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayShowTitleEnabled(false);
-        }
+        btnHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent mainAct = new Intent(context, MainActivity.class);
+                startActivity(mainAct);
+            }
+        });
 
+
+//        setSupportActionBar(toolbar);
+//        if (getSupportActionBar() != null) {
+//            getSupportActionBar().setDisplayShowTitleEnabled(false);
+//        }
+//
         // Setup drawer toggle
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 (Activity) context, drawerLayout, toolbar,
@@ -84,7 +94,7 @@ public class BaseActivity extends AppCompatActivity {
         if (lessonsRecyclerView != null) {
             lessonsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
             List<Lesson> lessonList = createSampleLessons();
-            LessonAdapter lessonAdapter = new LessonAdapter(lessonList, context, activity,isCompleted, isUnlocked);
+            LessonAdapter lessonAdapter = new LessonAdapter(lessonList, context, activity, isCompleted, isUnlocked);
             lessonsRecyclerView.setAdapter(lessonAdapter);
         }
     }

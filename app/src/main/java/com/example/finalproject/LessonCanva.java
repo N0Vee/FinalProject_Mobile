@@ -16,6 +16,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class LessonCanva extends BaseActivity {
 
+    private TextView usernameText, userScoreText;
     private LessonDatabaseHelper myDatabaseHelper;
     private TextView lessonTitleTextView;
     private TextView lessonContentTextView;
@@ -47,9 +48,16 @@ public class LessonCanva extends BaseActivity {
         nextPageButton = findViewById(R.id.nextPageButton);
         prevPageButton = findViewById(R.id.prevPageButton);
         quizButton = findViewById(R.id.quizButton);
+        usernameText = findViewById(R.id.username);
+        userScoreText = findViewById(R.id.userScore);
 
         // Get the lesson title from the intent
         currentLessonTitle = getIntent().getStringExtra("LESSON_TITLE");
+        int score = myDatabaseHelper.getTotalScore();
+        double progress = myDatabaseHelper.getCompletionPercentage();
+
+        usernameText.setText("JS Learner");
+        userScoreText.setText(score+"/50 points");
 
         if (currentLessonTitle != null) {
             // Get max pages for this lesson

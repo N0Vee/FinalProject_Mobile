@@ -24,8 +24,11 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.LessonView
     private Activity activity;
 
     private static String[] LESSON = {
-            "1. ชนิดข้อมูล (Data Types)", "2. ตัวแปร (Variables)", "3. ตัวดำเนินการ (Operators)",
-            "4. คำสั่งควบคุม (Control Statements)", "5. ฟังก์ชัน (Function)"
+            "1. ชนิดข้อมูล (Data Types)",
+            "2. ตัวแปร (Variables)",
+            "3. ตัวดำเนินการ (Operators)",
+            "4. คำสั่งควบคุม (Control Statements)",
+            "5. ฟังก์ชัน (Function)"
     };
     private boolean[] isCompleted;
     private boolean[] isUnlocked;
@@ -96,7 +99,7 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.LessonView
             lessonDescription.setText(lesson.getDescription());
 
             int i = index(lesson.getTitle());
-            // Set status icon based on lesson status
+            // Set status icon
             if (this.isCompleted[i]) {
                 lessonStatus.setImageResource(R.drawable.ic_check_circle);
             } else if (this.isUnlocked[i]) {
@@ -105,11 +108,11 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.LessonView
                 lessonStatus.setImageResource(R.drawable.ic_lock);
             }
 
-            // Set appropriate alpha for locked lessons
+            // Set alpha
             float alpha = this.isUnlocked[i] ? 1.0f : 0.5f;
             itemView.setAlpha(alpha);
 
-            // Set click listener for unlocked lessons
+
             if (this.isUnlocked[i]) {
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override

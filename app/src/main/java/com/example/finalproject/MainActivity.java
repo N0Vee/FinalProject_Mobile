@@ -57,7 +57,7 @@ public class MainActivity extends BaseActivity {
         double progress = myDatabaseHelper.getCompletionPercentage();
 
         // Set user data
-        usernameText.setText("John Doe");
+        usernameText.setText("JS Learner");
         userScoreText.setText(score+"/50 points");
         progressText.setText(String.format("%d%%", (int) progress));
         progressBar.setProgress((int) progress);
