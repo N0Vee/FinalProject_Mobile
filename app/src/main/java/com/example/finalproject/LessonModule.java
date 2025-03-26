@@ -1047,11 +1047,4 @@ public class LessonModule {
                 return -1;
         }
     }
-
-    public static void markLessonCompleted(String lessonTitle) {
-        // Method to mark a lesson as completed
-        // This would typically update a database or shared preferences
-        // For now, we'll just print a log message
-        System.out.println("Lesson " + lessonTitle + " marked as completed!");
-    }
 }

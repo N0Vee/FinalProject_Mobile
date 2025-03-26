@@ -6,6 +6,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -66,15 +67,11 @@ public class MainActivity extends BaseActivity {
         startLessonButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for (Lesson lesson : lessonList) {
-                    if (!lesson.isCompleted() && lesson.isUnlocked()) {
-                        Toast.makeText(MainActivity.this,
-                                "Starting lesson: " + lesson.getTitle(),
-                                Toast.LENGTH_SHORT).show();
-
-                        break;
-                    }
-                }
+                String lessonTitle = lessonDatabaseHelper.getLatestUnlockedNotCompletedLesson();
+                Intent intent = new Intent(MainActivity.this, LessonCanva.class);
+                intent.putExtra("LESSON_TITLE", lessonTitle);
+                startActivity(intent);
+                finish();
             }
         });
     }

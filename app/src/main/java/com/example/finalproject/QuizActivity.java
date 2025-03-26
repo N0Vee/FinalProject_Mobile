@@ -180,7 +180,6 @@ public class QuizActivity extends AppCompatActivity {
 
         // Mark lesson as completed if passed
         if (isPassed) {
-            LessonModule.markLessonCompleted(currentLessonTitle);
             int INDEX = index(currentLessonTitle);
             lessonDatabaseHelper.setLessonCompleted(currentLessonTitle,true);
             int highScore = lessonDatabaseHelper.getLessonScore(currentLessonTitle);

@@ -242,4 +242,17 @@ public class LessonDatabaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    public String getLatestUnlockedNotCompletedLesson() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT " + COLUMN_LESSON + " FROM " + TABLE_NAME +
+                " WHERE " + COLUMN_UNLOCKED + " = 1 AND " + COLUMN_COMPLETED + " = 0" +
+                " ORDER BY " + COLUMN_ID + " DESC LIMIT 1", null);
+
+        String lessonTitle = null;
+        if (cursor.moveToFirst()) {
+            lessonTitle = cursor.getString(0);
+        }
+        cursor.close();
+        return lessonTitle;
+    }
 }
